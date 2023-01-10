@@ -9,9 +9,10 @@ import Foundation
 
 extension Double {
 
-func forTrailingZero() -> String {
+func removeZeros() -> String {
     
     let string = String(format: "%g", self)
     return string
-}
+    
+    }
 }

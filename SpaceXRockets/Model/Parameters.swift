@@ -7,7 +7,10 @@
 
 import Foundation
 
+
 struct Parameters {
+    
     let name: String
-    let value: [String]
+    let firstValue: [String]
+    let secondValue: [String]
 }

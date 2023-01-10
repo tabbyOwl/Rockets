@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RocketDataCell: CellDataProtocol {
+struct RocketDataForCell: CellDataProtocol {
     let name: String
     let value: String
 }

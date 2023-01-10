@@ -86,6 +86,7 @@ class LaunchesTableCell: UITableViewCell {
         dateLabel.text = model.formattedDate
     }
     
+    //MARK: - Private methods
     
     private func setImage(model: Launch) {
         if model.isSuccess == true {
@@ -98,8 +99,7 @@ class LaunchesTableCell: UITableViewCell {
             statusImageView.tintColor = .red
         }
     }
-    //MARK: - Private methods
-    
+ 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             

@@ -12,8 +12,12 @@ class TableCellWithParametersCollection : UITableViewCell {
     
     static let identifier = "TableCellWithCollection"
 
+    // MARK: - Private properties
+    
     private let collectionViewController = CollectionViewController()
 
+    //MARK: override methods
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .black
@@ -31,15 +35,14 @@ class TableCellWithParametersCollection : UITableViewCell {
         setupConstraints()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    
-    }
+    //MARK: - Public methods
     
     func updateCell(with model: [Parameters]) {
         collectionViewController.parameters = model
-        collectionViewController.collectionView.reloadData()
+        collectionViewController.reloadCollection()
     }
+    
+    //MARK: - Private methods
     
     private func setupConstraints() {
         

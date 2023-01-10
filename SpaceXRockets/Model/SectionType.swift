@@ -10,8 +10,8 @@ import Foundation
 enum SectionType {
 
     case parameters(model: [Parameters])
-    case generalData(model: [RocketDataCell])
-    case firstStage(model: [RocketDataCell])
-    case secondStage(model: [RocketDataCell])
+    case generalData(model: [RocketDataForCell])
+    case firstStage(model: [RocketDataForCell])
+    case secondStage(model: [RocketDataForCell])
 
 }

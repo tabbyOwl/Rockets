@@ -11,6 +11,8 @@ class RocketParametersCollectionCell: UICollectionViewCell {
     
     static let identifier = "CollectionCell"
     
+    // MARK: - Private properties
+    
     private let baseView: UIView = {
         let view = UIView()
         view.contentMode = .scaleAspectFill
@@ -43,6 +45,7 @@ class RocketParametersCollectionCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: override methods
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -59,19 +62,21 @@ class RocketParametersCollectionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //MARK: - Public methods
     
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func configure(with model: Parameters, unit: String) {
+    //MARK: - Public methods
+    
+    func configure(with model: Parameters, numberOfSegment: Int) {
         
-        nameLabel.text = "\(model.name), \(unit)"
-        if unit == "kg" || unit == "m" {
-        valueLabel.text = model.value[0]
+        if UserDefaults.standard.integer(forKey: "segmentedIndex\(numberOfSegment)") == 0 {
+            nameLabel.text = "\(model.name), \(model.firstValue[1])"
+            valueLabel.text = "\(model.firstValue[0])"
         } else {
-            valueLabel.text = model.value[1]
+            nameLabel.text = "\(model.name), \(model.secondValue[1])"
+            valueLabel.text = "\(model.secondValue[0])"
         }
     }
     

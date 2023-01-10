@@ -13,7 +13,7 @@ class LaunchesViewController: UIViewController {
     var rocket: Rocket?
     var launches: [Launch]?
     
-    var sortedLaunches: [Launch] {
+    private var sortedLaunches: [Launch] {
 
         guard let rocket = rocket,
         let launches = launches else { return []}
@@ -34,21 +34,14 @@ class LaunchesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         navigationController?.navigationBar.barTintColor = .clear
         navigationController?.navigationBar.tintColor = .white
 
         fetchLaunches()
-        setupNavigationController()
         tableView.delegate = self
         tableView.dataSource = self
         setupConstraints()
     }
-    
-
-        private func setupNavigationController() {
-          
-        }
     
     @objc private func goBack() {
         

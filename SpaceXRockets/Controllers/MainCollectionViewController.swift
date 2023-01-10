@@ -9,17 +9,17 @@ import UIKit
 
 class MainCollectionViewController : UIViewController {
     
+    //MARK: private properties
+    
     private var pageControl = UIPageControl()
-    
-    let rocketVC = RocketDataTableViewController()
-    
+
     private var rockets: [Rocket] = [] {
         didSet {
             pageControl.numberOfPages = rockets.count
         }
     }
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = .zero
@@ -31,6 +31,8 @@ class MainCollectionViewController : UIViewController {
         return collection
     }()
     
+    //MARK: override methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,45 +41,35 @@ class MainCollectionViewController : UIViewController {
         setupNotification()
         setUpCollectionView()
         configurePageControl()
-       setupConstraints()
+        setupConstraints()
     }
 
+    //MARK: private methods
+    
     private func setupNavigationController() {
         navigationItem.backButtonTitle = "Назад"
     }
     
     private func fetchRockets() {
         
-        RocketService().load { [self] result in
-            
-                DispatchQueue.main.sync {
-                    self.rockets = result.reversed()
-                    }
-                    self.collectionView.reloadData()
-                }
+        RocketService().load { [weak self] result in
+            DispatchQueue.main.sync {
+                self?.rockets = result
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     private func setupNotification() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(pushLaunchesViewController), name: Notification.Name("TableFooterNotification"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(pushSettingsViewController), name: Notification.Name("SettingsImageNotification"), object: nil)
-        
     }
     
     @objc private func pushLaunchesViewController() {
         
         let vc = LaunchesViewController()
         vc.rocket = rockets[collectionView.tag]
-        
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc private func pushSettingsViewController() {
-        
-        let vc = SettingsTableViewController()
-        let navigationVC = UINavigationController(rootViewController: vc)
-        navigationController?.present(navigationVC, animated: true)
     }
     
     private func configurePageControl() {
@@ -106,7 +98,6 @@ class MainCollectionViewController : UIViewController {
         self.view.addSubview(collectionView)
         view.backgroundColor = .black
     }
-    
     
     private func setupConstraints() {
 
@@ -139,6 +130,7 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
      
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell.identifier, for: indexPath) as? MainCollectionCell {
             
+           
             cell.configure(with: rockets[indexPath.row])
     
             return cell
@@ -154,22 +146,24 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
     }
 }
 
+// MARK: Collection flow layout
+
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: view.frame.size.width, height: collectionView.frame.size.height)
+        return collectionView.frame.size
     }
 
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }

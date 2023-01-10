@@ -23,7 +23,7 @@
 		DA40CB1228D6FFA10030FF0F /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40CB1128D6FFA10030FF0F /* Items.swift */; };
 		DA40CB1428D703EA0030FF0F /* String+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40CB1328D703EA0030FF0F /* String+Formatter.swift */; };
 		DA40CB1628D716B60030FF0F /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40CB1528D716B60030FF0F /* Parameters.swift */; };
-		DA40CB1828D716E30030FF0F /* RocketDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40CB1728D716E30030FF0F /* RocketDataCell.swift */; };
+		DA40CB1828D716E30030FF0F /* RocketDataForCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40CB1728D716E30030FF0F /* RocketDataForCell.swift */; };
 		DA5DFED928B47D8000D64CF4 /* TableCellWithParametersCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5DFED828B47D8000D64CF4 /* TableCellWithParametersCollection.swift */; };
 		DA5DFEDB28B47F2600D64CF4 /* RocketParametersCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5DFEDA28B47F2600D64CF4 /* RocketParametersCollectionCell.swift */; };
 		DA68FFAC28D0458C00C55766 /* LaunchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68FFAB28D0458C00C55766 /* LaunchesService.swift */; };
@@ -61,7 +61,7 @@
 		DA40CB1128D6FFA10030FF0F /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		DA40CB1328D703EA0030FF0F /* String+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Formatter.swift"; sourceTree = "<group>"; };
 		DA40CB1528D716B60030FF0F /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
-		DA40CB1728D716E30030FF0F /* RocketDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketDataCell.swift; sourceTree = "<group>"; };
+		DA40CB1728D716E30030FF0F /* RocketDataForCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketDataForCell.swift; sourceTree = "<group>"; };
 		DA5DFED828B47D8000D64CF4 /* TableCellWithParametersCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellWithParametersCollection.swift; sourceTree = "<group>"; };
 		DA5DFEDA28B47F2600D64CF4 /* RocketParametersCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketParametersCollectionCell.swift; sourceTree = "<group>"; };
 		DA68FFAB28D0458C00C55766 /* LaunchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesService.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 				DA1D2F8728DC3605003B8B74 /* Launches.swift */,
 				DA40CB1128D6FFA10030FF0F /* Items.swift */,
 				DA97361F28C743250035315A /* CellDataProtocol.swift */,
-				DA40CB1728D716E30030FF0F /* RocketDataCell.swift */,
+				DA40CB1728D716E30030FF0F /* RocketDataForCell.swift */,
 				DA40CB1528D716B60030FF0F /* Parameters.swift */,
 				DAB48A5528D3022C00E51B6A /* SectionType.swift */,
 			);
@@ -284,7 +284,7 @@
 				DA3E451128B0D17300FCF5C3 /* LaunchesViewController.swift in Sources */,
 				DA5DFEDB28B47F2600D64CF4 /* RocketParametersCollectionCell.swift in Sources */,
 				DA40CB1228D6FFA10030FF0F /* Items.swift in Sources */,
-				DA40CB1828D716E30030FF0F /* RocketDataCell.swift in Sources */,
+				DA40CB1828D716E30030FF0F /* RocketDataForCell.swift in Sources */,
 				DA40CB1428D703EA0030FF0F /* String+Formatter.swift in Sources */,
 				DACDE1BA28B212A900FA5EE4 /* UIView+Config.swift in Sources */,
 				DA3B10D728CB00D000E07CBB /* UIImageView+URL.swift in Sources */,

@@ -14,6 +14,8 @@ class SettingsTableCell: UITableViewCell {
     
     var segmentedControl = UISegmentedControl()
     
+    // MARK: - Private properties
+    
     private var units: [String] = []
  
     private let nameLabel: UILabel = {
@@ -24,6 +26,8 @@ class SettingsTableCell: UITableViewCell {
         return label
     }()
 
+    //MARK: override methods
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .black
@@ -41,17 +45,22 @@ class SettingsTableCell: UITableViewCell {
         
     }
     
-    func configure(with model: Items, tag: Int) {
+    //MARK: public methods
+    
+    func configure(with model: Parameters, numberOfSegment: Int) {
         
         self.nameLabel.text = model.name
-        self.units = model.units
-        setupSegmentedControl(tag: tag)
+        units.append(model.firstValue[1])
+        units.append(model.secondValue[1])
+        setupSegmentedControl(numberOfSegment: numberOfSegment)
         setupConstraints()
     }
    
-    private func setupSegmentedControl(tag: Int) {
+    //MARK: private methods
+    
+    private func setupSegmentedControl(numberOfSegment: Int) {
         let control = UISegmentedControl(items: units)
-        control.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "segmentedIndex\(tag)")
+        control.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "segmentedIndex\(numberOfSegment)")
         control.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
         control.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .selected)
         control.setWidth(50, forSegmentAt: 0)
