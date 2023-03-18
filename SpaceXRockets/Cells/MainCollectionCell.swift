@@ -11,7 +11,7 @@ class MainCollectionCell: UICollectionViewCell {
     
     static let identifier = "MainCollectionCell"
     
-    private let rocketTableViewController = RocketDataTableViewController()
+    let rocketTableViewController = RocketDataTableViewController()
     
     //MARK: - Public methods
     
@@ -19,22 +19,5 @@ class MainCollectionCell: UICollectionViewCell {
       
         rocketTableViewController.rocket = model
         contentView.addSubview(rocketTableViewController.view)
-        //setupConstraints()
-        //rocketTableViewController.reloadTable()
-    }
- 
-    // MARK: - Private methods
-    
-    private func setupConstraints() {
-        
-        rocketTableViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-
-            rocketTableViewController.view.topAnchor.constraint(equalTo: contentView.topAnchor),
-            rocketTableViewController.view.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            rocketTableViewController.view.leftAnchor.constraint(equalTo: contentView.rightAnchor)
-            
-        ])
     }
 }

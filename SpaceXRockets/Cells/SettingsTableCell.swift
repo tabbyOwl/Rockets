@@ -50,8 +50,8 @@ class SettingsTableCell: UITableViewCell {
     func configure(with model: Parameters, numberOfSegment: Int) {
         
         self.nameLabel.text = model.name
-        units.append(model.firstValue[1])
-        units.append(model.secondValue[1])
+        units.append(model.firstValue.unit.rawValue)
+        units.append(model.secondValue.unit.rawValue)
         setupSegmentedControl(numberOfSegment: numberOfSegment)
         setupConstraints()
     }

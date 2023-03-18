@@ -8,13 +8,14 @@
 import Foundation
 import UIKit
 
+
 class TableCellWithParametersCollection : UITableViewCell {
     
     static let identifier = "TableCellWithCollection"
 
     // MARK: - Private properties
     
-    private let collectionViewController = CollectionViewController()
+     let collectionViewController = CollectionViewController()
 
     //MARK: override methods
     
@@ -32,29 +33,13 @@ class TableCellWithParametersCollection : UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupConstraints()
+        collectionViewController.view.frame = contentView.bounds
     }
     
     //MARK: - Public methods
     
-    func updateCell(with model: [Parameters]) {
+    func configure(with model: [Parameters]) {
         collectionViewController.parameters = model
-        collectionViewController.reloadCollection()
-    }
-    
-    //MARK: - Private methods
-    
-    private func setupConstraints() {
-        
-        collectionViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            collectionViewController.view.topAnchor.constraint(equalTo: contentView.topAnchor),
-            collectionViewController.view.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            collectionViewController.view.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            collectionViewController.view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
     }
 }
 

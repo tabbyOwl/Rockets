@@ -19,7 +19,6 @@ class RocketParametersCollectionCell: UICollectionViewCell {
         view.clipsToBounds = true
         view.layer.cornerRadius = 35
         view.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -28,8 +27,6 @@ class RocketParametersCollectionCell: UICollectionViewCell {
         label.textAlignment = .center
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -40,8 +37,6 @@ class RocketParametersCollectionCell: UICollectionViewCell {
         label.layer.opacity = 0.5
         label.backgroundColor = .clear
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -49,7 +44,21 @@ class RocketParametersCollectionCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupConstraints()
+        let height = contentView.bounds.height
+        let width = contentView.bounds.width
+        
+        baseView.frame = CGRect(x: 0,
+                                y: 0,
+                                width: width,
+                                height: height)
+        valueLabel.frame = CGRect(x: 0,
+                                  y: height/3,
+                                  width: width,
+                                  height: height/5)
+        nameLabel.frame = CGRect(x: 0,
+                                 y: valueLabel.frame.maxY ,
+                                 width: width,
+                                 height: height/5)
     }
     
     override init(frame: CGRect) {
@@ -63,42 +72,16 @@ class RocketParametersCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override class func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     //MARK: - Public methods
     
     func configure(with model: Parameters, numberOfSegment: Int) {
-        
         if UserDefaults.standard.integer(forKey: "segmentedIndex\(numberOfSegment)") == 0 {
-            nameLabel.text = "\(model.name), \(model.firstValue[1])"
-            valueLabel.text = "\(model.firstValue[0])"
+            nameLabel.text = "\(model.name), \(model.firstValue.unit)"
+            valueLabel.text = "\(model.firstValue.value)"
         } else {
-            nameLabel.text = "\(model.name), \(model.secondValue[1])"
-            valueLabel.text = "\(model.secondValue[0])"
+            nameLabel.text = "\(model.name), \(model.secondValue.unit)"
+            valueLabel.text = "\(model.secondValue.value)"
         }
     }
-    
-    // MARK: - Private methods
-    
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            
-            baseView.widthAnchor.constraint(equalToConstant: contentView.bounds.width),
-            baseView.heightAnchor.constraint(equalToConstant: contentView.bounds.height),
-            baseView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            baseView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            
-            valueLabel.centerXAnchor.constraint(equalTo: baseView.centerXAnchor),
-            valueLabel.centerYAnchor.constraint(equalTo: baseView.centerYAnchor, constant: -10),
-            valueLabel.widthAnchor.constraint(equalTo: baseView.widthAnchor),
-            
-            nameLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 5),
-            nameLabel.widthAnchor.constraint(equalTo: baseView.widthAnchor)
-        ])
-    }
-    
 }
-
 

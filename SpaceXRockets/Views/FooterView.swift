@@ -9,7 +9,7 @@ import UIKit
 
 class FooterView: UIView {
     
-    private let button: UIButton = {
+     let button: UIButton = {
         let button = UIButton()
         button.backgroundColor = .init(white: 1, alpha: 0.1)
         button.setTitle("Посмотреть запуски", for: .normal)
@@ -22,8 +22,6 @@ class FooterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        button.addTarget(self, action: #selector(launchesInfoTapped), for: .touchUpInside)
         addSubview(button)
     }
     
@@ -36,9 +34,6 @@ class FooterView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    @objc private func launchesInfoTapped() {
-        NotificationCenter.default.post(name: Notification.Name("TableFooterNotification"), object: nil)
-    }
+ 
 }
 

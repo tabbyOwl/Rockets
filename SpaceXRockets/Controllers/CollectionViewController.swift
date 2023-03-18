@@ -7,12 +7,15 @@
 
 import UIKit
 
+protocol CollectionViewControllerDelegate : AnyObject {
+    func update()
+}
+
 class CollectionViewController: UIViewController {
     
     var parameters: [Parameters] = []
     
     private let collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -25,18 +28,16 @@ class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+     
         setupDefaultUnits()
         setUpView()
         setupConstraints()
-        setupNotification()
     }
 
-    func reloadCollection() {
-        
+    func reloadData() {
         collectionView.reloadData()
     }
+    
     //MARK: private methods
     
     private func setupDefaultUnits() {
@@ -44,25 +45,13 @@ class CollectionViewController: UIViewController {
             let item = UserDefaults.standard.string(forKey: parameters[0].name)
             if item == nil {
                 for parameter in parameters {
-                    UserDefaults.standard.set(parameter.firstValue, forKey: parameter.name)
+                    UserDefaults.standard.set(parameter.firstValue.value, forKey: parameter.name)
                 }
             }
         }
     }
-    
-    private func setupNotification() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(update), name: Notification.Name("CollectionNotification"), object: nil)
-        
-    }
-    
-    @objc private func update() {
-        
-        collectionView.reloadData()
-    }
-    
+ 
     private func setUpView() {
-        
         collectionView.register(RocketParametersCollectionCell.self, forCellWithReuseIdentifier: RocketParametersCollectionCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -71,7 +60,6 @@ class CollectionViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -85,18 +73,14 @@ class CollectionViewController: UIViewController {
 // MARK: Collection data source
 
 extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
         return parameters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketParametersCollectionCell.identifier, for: indexPath) as? RocketParametersCollectionCell {
-        
             cell.configure(with: parameters[indexPath.row], numberOfSegment: indexPath.row)
-   
             return cell
         }
         return RocketParametersCollectionCell()
@@ -106,7 +90,6 @@ extension CollectionViewController: UICollectionViewDelegate, UICollectionViewDa
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         return CGSize(width: 110, height: 110)
     }
     
@@ -118,7 +101,4 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         return 10
     }
 }
-    
-
-
 

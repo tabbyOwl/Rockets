@@ -34,7 +34,6 @@
 		DA7FA72228CA10A800D2A8F7 /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7FA72128CA10A800D2A8F7 /* MainCollectionCell.swift */; };
 		DA850DCD28D96A6400F1EDB1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA850DCF28D96A6400F1EDB1 /* Localizable.strings */; };
 		DA850DD228D9774700F1EDB1 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA850DD128D9774700F1EDB1 /* HeaderView.swift */; };
-		DA850DD428D981BA00F1EDB1 /* NameAndSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA850DD328D981BA00F1EDB1 /* NameAndSettingsView.swift */; };
 		DA904C4828C85AD400D41427 /* RocketDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904C4728C85AD400D41427 /* RocketDataTableViewController.swift */; };
 		DA97362028C743260035315A /* CellDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA97361F28C743250035315A /* CellDataProtocol.swift */; };
 		DAAF1746299CBBB1005AB8EB /* SpaceXRocketsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF1745299CBBB1005AB8EB /* SpaceXRocketsTests.swift */; };
@@ -86,7 +85,6 @@
 		DA850DCE28D96A6400F1EDB1 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA850DD028D96A6800F1EDB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA850DD128D9774700F1EDB1 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		DA850DD328D981BA00F1EDB1 /* NameAndSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAndSettingsView.swift; sourceTree = "<group>"; };
 		DA904C4728C85AD400D41427 /* RocketDataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketDataTableViewController.swift; sourceTree = "<group>"; };
 		DA97361F28C743250035315A /* CellDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDataProtocol.swift; sourceTree = "<group>"; };
 		DAAF1743299CBBB1005AB8EB /* SpaceXRocketsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceXRocketsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,7 +224,6 @@
 			children = (
 				DA3B10D828CB021000E07CBB /* FooterView.swift */,
 				DA850DD128D9774700F1EDB1 /* HeaderView.swift */,
-				DA850DD328D981BA00F1EDB1 /* NameAndSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,7 +349,6 @@
 				DACDE1BA28B212A900FA5EE4 /* UIView+Config.swift in Sources */,
 				DA3B10D728CB00D000E07CBB /* UIImageView+URL.swift in Sources */,
 				DACDE1B628B1DB1500FA5EE4 /* RocketDataTableCell.swift in Sources */,
-				DA850DD428D981BA00F1EDB1 /* NameAndSettingsView.swift in Sources */,
 				DA68FFAE28D0476A00C55766 /* Launch.swift in Sources */,
 				DAB48A5628D3022C00E51B6A /* SectionType.swift in Sources */,
 				DA40CB1028D6F73D0030FF0F /* Double+TrailingZero.swift in Sources */,

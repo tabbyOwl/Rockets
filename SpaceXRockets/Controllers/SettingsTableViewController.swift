@@ -12,7 +12,7 @@ import UIKit
 class SettingsTableViewController: UIViewController {
     
     var parameters: [Parameters] = []
-
+    weak var updateTableDelegate: UpdateRocketDataTableDelegate?
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .black
@@ -30,7 +30,7 @@ class SettingsTableViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+      
         setupNavigationController()
         view.addSubview(tableView)
         setupConstraints()
@@ -39,7 +39,6 @@ class SettingsTableViewController: UIViewController {
     //MARK: private methods
     
     private func setupNavigationController() {
-        
         navigationController?.navigationBar.isTranslucent = false
     
         navigationItem.title = "Настройки"
@@ -53,11 +52,10 @@ class SettingsTableViewController: UIViewController {
         
         navigationItem.setRightBarButton(backButton, animated: true)
         navigationItem.rightBarButtonItem?.tintColor = .white
-        
     }
     
     @objc private func backButtonTapped() {
-        
+        updateTableDelegate?.updateTable()
         dismiss(animated: true)
     }
     
@@ -77,13 +75,11 @@ class SettingsTableViewController: UIViewController {
         let parameter = parameters[sender.tag]
       
         if sender.selectedSegmentIndex == 1 {
-            UserDefaults.standard.setValue(parameter.firstValue, forKey: parameter.name)
+            UserDefaults.standard.setValue(parameter.firstValue.value, forKey: parameter.name)
             UserDefaults.standard.setValue(1, forKey: "segmentedIndex\(sender.tag)")
-            NotificationCenter.default.post(name: Notification.Name("CollectionNotification"), object: nil)
         } else {
-            UserDefaults.standard.setValue(parameter.secondValue, forKey: parameter.name)
+            UserDefaults.standard.setValue(parameter.secondValue.value, forKey: parameter.name)
             UserDefaults.standard.setValue(0, forKey: "segmentedIndex\(sender.tag)")
-            NotificationCenter.default.post(name: Notification.Name("CollectionNotification"), object: nil)
         }
     }
 }
@@ -93,7 +89,6 @@ class SettingsTableViewController: UIViewController {
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableCell.identifier) as? SettingsTableCell else { return UITableViewCell()}
         
         cell.configure(with: parameters[indexPath.row], numberOfSegment: indexPath.row)
@@ -105,12 +100,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
         return parameters.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 70
     }
 }
