@@ -7,10 +7,20 @@
 
 import Foundation
 
-
 struct Parameters {
-    
     let name: String
-    let firstValue: [String]
-    let secondValue: [String]
+    let firstValue: Value
+    let secondValue: Value
+}
+
+struct Value {
+    let value: String
+    let unit: Units
+}
+
+enum Units: String {
+    case m = "m"
+    case ft = "ft"
+    case kg = "kg"
+    case lb = "lb"
 }

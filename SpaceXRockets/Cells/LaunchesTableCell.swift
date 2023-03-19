@@ -15,7 +15,6 @@ class LaunchesTableCell: UITableViewCell {
     //MARK: - Private properties
     
     private let baseView: UIView = {
-        
         let view = UIView()
         view.backgroundColor = .init(white: 1, alpha: 0.08)
         view.clipsToBounds = true
@@ -47,7 +46,6 @@ class LaunchesTableCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-     
         return imageView
     }()
     
@@ -62,10 +60,8 @@ class LaunchesTableCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         contentView.backgroundColor = .black
         contentView.clipsToBounds = true
-        
         rocketImageView.addSubview(statusImageView)
         baseView.addSubviews(nameLabel, dateLabel, rocketImageView)
         contentView.addSubview(baseView)
@@ -80,7 +76,6 @@ class LaunchesTableCell: UITableViewCell {
     //MARK: - Public methods
     
     func configure(with model: Launch) {
-  
         setImage(model: model)
         nameLabel.text = model.name
         dateLabel.text = model.formattedDate

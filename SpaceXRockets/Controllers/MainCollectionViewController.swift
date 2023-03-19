@@ -7,20 +7,25 @@
 
 import UIKit
 
+
+protocol MainCollectionViewControllerDelegate: AnyObject {
+    func showLaunchInfo()
+}
+
 class MainCollectionViewController : UIViewController {
-    
+  
     //MARK: private properties
     
     private var pageControl = UIPageControl()
-
     private var rockets: [Rocket] = [] {
         didSet {
-            pageControl.numberOfPages = rockets.count
+            DispatchQueue.main.async {
+                self.pageControl.numberOfPages = self.rockets.count
+            }
         }
     }
     
     private let collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = .zero
         layout.scrollDirection = .horizontal
@@ -30,118 +35,80 @@ class MainCollectionViewController : UIViewController {
     
         return collection
     }()
-    
+
     //MARK: override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fetchRockets()
-        setupNavigationController()
-        setupNotification()
-        setUpCollectionView()
         configurePageControl()
-        setupConstraints()
+        setUpCollectionView()
+        fetchRockets()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = CGRect(x: 0,
+                                      y: 0,
+                                      width: view.frame.width,
+                                      height: view.frame.height - 50)
+        pageControl.frame = CGRect(x: 0,
+                                   y: view.frame.height - 50,
+                                   width: view.frame.width,
+                                   height: 50)
+    }
+    
     //MARK: private methods
     
-    private func setupNavigationController() {
-        navigationItem.backButtonTitle = "Назад"
-    }
-    
     private func fetchRockets() {
-        
         RocketService().load { [weak self] result in
-            DispatchQueue.main.sync {
-                self?.rockets = result
+            self?.rockets = result
+            DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
         }
     }
     
-    private func setupNotification() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(pushLaunchesViewController), name: Notification.Name("TableFooterNotification"), object: nil)
-    }
-    
-    @objc private func pushLaunchesViewController() {
-        
-        let vc = LaunchesViewController()
-        vc.rocket = rockets[collectionView.tag]
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
     private func configurePageControl() {
-        
         pageControl.addTarget(self, action: #selector(pageControlDidChange), for: .valueChanged)
         view.addSubview(pageControl)
         pageControl.backgroundColor = .init(white: 1, alpha: 0.1)
         pageControl.clipsToBounds = true
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
     }
 
     @objc func pageControlDidChange(_ sender: UIPageControl) {
-
         collectionView.isPagingEnabled = false
         collectionView.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .centeredHorizontally, animated: true)
         collectionView.isPagingEnabled = true
     }
     
     private func setUpCollectionView() {
- 
         collectionView.register(MainCollectionCell.self, forCellWithReuseIdentifier: MainCollectionCell.identifier)
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
-
         self.view.addSubview(collectionView)
         view.backgroundColor = .black
-    }
-    
-    private func setupConstraints() {
-
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-
-            pageControl.heightAnchor.constraint(equalToConstant: 50),
-            pageControl.widthAnchor.constraint(equalToConstant: view.frame.size.width),
-            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 }
    
 // MARK: Collection data source
 
 extension MainCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-   
          return rockets.count
     }
         
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-     
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionCell.identifier, for: indexPath) as? MainCollectionCell {
-            
-           
             cell.configure(with: rockets[indexPath.row])
-    
+            cell.rocketTableViewController.mainCollectionViewControllerDelegate = self
             return cell
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
         pageControl.currentPage = indexPath.row
-        
         collectionView.tag = pageControl.currentPage
     }
 }
@@ -151,7 +118,6 @@ extension MainCollectionViewController: UICollectionViewDelegate, UICollectionVi
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         return collectionView.frame.size
     }
 
@@ -167,3 +133,12 @@ extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
+extension MainCollectionViewController: MainCollectionViewControllerDelegate {
+    func showLaunchInfo() {
+        let vc = LaunchesViewController()
+        vc.rocket = rockets[collectionView.tag]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+

@@ -15,7 +15,6 @@ struct Launch: Codable {
     var date: String?
     
     var formattedDate: String? {
-        
         guard let date = self.date?.formattedDateFromString(inputFormat: "yyyy-mm-dd'T'hh:mm:sss-hh:mm") else { return ""}
         
         if date.isEmpty {

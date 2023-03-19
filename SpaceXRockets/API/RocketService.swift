@@ -8,7 +8,7 @@
 import Foundation
 
 class RocketService {
-
+    
     func load(completion: @escaping ([Rocket]) -> ()) {
         guard let url = URL(string: "https://api.spacexdata.com/v4/rockets")
         else { return }
@@ -16,11 +16,7 @@ class RocketService {
             if let error = error {
                 print(error)
             }
-            
-            guard let data = data else {
-                return
-            }
-            
+            guard let data = data else { return }
             do {
                 let result = try JSONDecoder().decode([Rocket].self, from: data)
                 completion(result)

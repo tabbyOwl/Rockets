@@ -8,7 +8,7 @@
 import UIKit
 
 class RocketDataTableCell: UITableViewCell {
-
+    
     static let identifier = "RocketTableCell"
     
     //MARK: - Private properties
@@ -37,7 +37,6 @@ class RocketDataTableCell: UITableViewCell {
         contentView.backgroundColor = .black
         contentView.tintColor = .black
         contentView.clipsToBounds = true
-      
         contentView.addSubviews(nameLabel, valueLabel)
         setupConstraints()
     }
@@ -47,23 +46,23 @@ class RocketDataTableCell: UITableViewCell {
     }
 
     //MARK: - Public methods
- 
+    
     func configure(with model: CellDataProtocol) {
-
         nameLabel.text = model.name
         valueLabel.text = model.value
     }
     
     //MARK: - Private methods
- 
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-           
+            
             valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20),
             valueLabel.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor)
         ])
     }
 }
+

@@ -8,6 +8,5 @@
 import Foundation
 
 struct Launches: Decodable {
-    
     let docs: [Launch]
 }
