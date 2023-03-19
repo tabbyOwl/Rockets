@@ -17,7 +17,6 @@ class HeaderView: UIView {
         button.tintColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = 15
-        
         return button
     }()
 
@@ -63,12 +62,9 @@ class HeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         bottomView.addSubviews(nameLabel, settingsButton)
         addSubviews(imageView,bottomView)
-        
         settingsButton.addTarget(self, action: #selector(pushSettingsViewController), for: .touchUpInside)
-        
     }
     
     @objc private func pushSettingsViewController() {

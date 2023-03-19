@@ -8,11 +8,11 @@
 import Foundation
 
 extension Double {
-
-func removeZeros() -> String {
     
-    let string = String(format: "%g", self)
-    return string
-    
+    func removeZeros() -> String {
+        let string = String(format: "%g", self)
+        return string
     }
 }
+
+

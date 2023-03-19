@@ -20,4 +20,9 @@ class MainCollectionCell: UICollectionViewCell {
         rocketTableViewController.rocket = model
         contentView.addSubview(rocketTableViewController.view)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        rocketTableViewController.rocket = nil
+    }
 }

@@ -17,10 +17,11 @@ class MainCollectionViewController : UIViewController {
     //MARK: private properties
     
     private var pageControl = UIPageControl()
-
     private var rockets: [Rocket] = [] {
         didSet {
-            pageControl.numberOfPages = rockets.count
+            DispatchQueue.main.async {
+                self.pageControl.numberOfPages = self.rockets.count
+            }
         }
     }
     
@@ -34,15 +35,14 @@ class MainCollectionViewController : UIViewController {
     
         return collection
     }()
-    
+
     //MARK: override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchRockets()
-        setUpCollectionView()
         configurePageControl()
-   
+        setUpCollectionView()
+        fetchRockets()
     }
 
     override func viewDidLayoutSubviews() {
@@ -56,12 +56,13 @@ class MainCollectionViewController : UIViewController {
                                    width: view.frame.width,
                                    height: 50)
     }
+    
     //MARK: private methods
- 
+    
     private func fetchRockets() {
         RocketService().load { [weak self] result in
+            self?.rockets = result
             DispatchQueue.main.async {
-                self?.rockets = result
                 self?.collectionView.reloadData()
             }
         }
@@ -75,7 +76,6 @@ class MainCollectionViewController : UIViewController {
     }
 
     @objc func pageControlDidChange(_ sender: UIPageControl) {
-        
         collectionView.isPagingEnabled = false
         collectionView.scrollToItem(at: IndexPath(row: sender.currentPage, section: 0), at: .centeredHorizontally, animated: true)
         collectionView.isPagingEnabled = true
@@ -86,7 +86,6 @@ class MainCollectionViewController : UIViewController {
         collectionView.isPagingEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
-
         self.view.addSubview(collectionView)
         view.backgroundColor = .black
     }

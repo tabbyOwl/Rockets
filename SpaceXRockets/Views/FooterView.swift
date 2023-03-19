@@ -27,7 +27,6 @@ class FooterView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-      
         button.frame = CGRect(x: 20, y: 20, width: self.frame.size.width - 40, height: self.frame.size.height - 30)
     }
     

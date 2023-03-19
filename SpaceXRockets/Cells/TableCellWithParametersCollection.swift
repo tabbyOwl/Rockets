@@ -15,7 +15,7 @@ class TableCellWithParametersCollection : UITableViewCell {
 
     // MARK: - Private properties
     
-     let collectionViewController = CollectionViewController()
+    let collectionViewController = CollectionViewController()
 
     //MARK: override methods
     
@@ -35,7 +35,7 @@ class TableCellWithParametersCollection : UITableViewCell {
         super.layoutSubviews()
         collectionViewController.view.frame = contentView.bounds
     }
-    
+   
     //MARK: - Public methods
     
     func configure(with model: [Parameters]) {

@@ -12,16 +12,11 @@ protocol RocketDataTableViewControllerDelegate: AnyObject {
     func showSettingsViewController()
 }
 
-protocol UpdateRocketDataTableDelegate: AnyObject {
-    func updateTable()
-}
-
 class RocketDataTableViewController: UIViewController {
-    
      var rocket: Rocket? {
         didSet {
             setRocketData()
-            tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -29,13 +24,9 @@ class RocketDataTableViewController: UIViewController {
     
     weak var collectionViewControllerDelegate: CollectionViewControllerDelegate?
     weak var mainCollectionViewControllerDelegate: MainCollectionViewControllerDelegate?
-    
     private var sections = [SectionType]()
-    
     private var parameters: [Parameters] = []
-    
     private let tableView: UITableView = {
-        
         let tableView = UITableView()
         tableView.backgroundColor = .black
         tableView.contentInsetAdjustmentBehavior = .never
@@ -50,7 +41,6 @@ class RocketDataTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.delegate = self
         tableView.dataSource = self
         view.isUserInteractionEnabled = true
@@ -136,7 +126,6 @@ class RocketDataTableViewController: UIViewController {
     
     private func setGeneralData(rocket: Rocket) {
         let costPerLaunch = "$\((rocket.costPerLaunch/1000000).removeZeros()) млн"
-        
         let date = rocket.firstFlight.formattedDateFromString(inputFormat: "yyyy-mm-dd")
         let country = NSLocalizedString(rocket.country, comment: "")
         
@@ -148,7 +137,7 @@ class RocketDataTableViewController: UIViewController {
     }
     
     private func setStageData(stage: Stage, section: Int) {
-        guard let burnTimeSec = stage.burnTimeSec else { return }
+        let burnTimeSec = stage.burnTimeSec ?? 0
         let fuelAmountTons = stage.fuelAmountTons
     
         let stageData: [RocketDataForCell] = [
@@ -158,7 +147,6 @@ class RocketDataTableViewController: UIViewController {
                   value: "\(fuelAmountTons.removeZeros()) ton"),
             .init(name: "Время сгорания",
                   value: "\(burnTimeSec.removeZeros()) sec")]
-        
         
         if section == 1 {
             self.sections.append(.firstStage(model: stageData))
@@ -174,7 +162,6 @@ extension RocketDataTableViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionType = sections[indexPath.section]
-        
         var cellIdentifier = ""
         
         switch sectionType {
@@ -191,7 +178,6 @@ extension RocketDataTableViewController: UITableViewDelegate, UITableViewDataSou
         case .parameters(let parameters):
             if let cell = cell as? TableCellWithParametersCollection {
                 cell.configure(with: parameters)
-                    cell.collectionViewController.reloadData()
             }
         case .generalData(let generalData):
             (cell as? RocketDataTableCell)?.configure(with: generalData[indexPath.row])
@@ -254,16 +240,7 @@ extension RocketDataTableViewController: RocketDataTableViewControllerDelegate {
         let vc = SettingsTableViewController()
         let navigationVC = UINavigationController(rootViewController: vc)
         vc.parameters = parameters
-        vc.updateTableDelegate = self
-        present(navigationVC, animated: true)
-        //self.view.window?.rootViewController?.present(navigationVC, animated: true)
+        self.view.window?.rootViewController?.present(navigationVC, animated: true)
     }
 }
 
-extension RocketDataTableViewController: UpdateRocketDataTableDelegate {
-    func updateTable() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-}

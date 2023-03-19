@@ -8,9 +8,9 @@
 import Foundation
 
 struct Rocket: Decodable {
-
+    
     var sections = [SectionType]()
-  
+    
     let id: String
     let name: String
     var height: HeightAndDiameterData
@@ -40,10 +40,11 @@ struct Rocket: Decodable {
         case images = "flickr_images"
     }
 }
+
 //MARK: support structs
 
 struct PayloadWeights: Decodable {
-
+    
     var id: String
     var name: String
     var kg: Double
@@ -76,85 +77,3 @@ struct Stage: Decodable {
         case burnTimeSec = "burn_time_sec"
     }
 }
-
-//var rocketss = [Rocket(name: "Falcon 1",
-//                       height: HeightAndDiameterData(meters: 5, feet: 5),
-//                       diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                       mass: Mass(kg: 0, lb: 0),
-//                       payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                       firstFlight: "0",
-//                       country: "0",
-//                       costPerLaunch: 0, images: [""],
-//                       firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                       secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                Rocket(name: "Falcon 2",
-//                                     height: HeightAndDiameterData(meters: 0, feet: 0),
-//                                     diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                     mass: Mass(kg: 0, lb: 0),
-//                                     payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                     firstFlight: "0",
-//                                     country: "0",
-//                                     costPerLaunch: 0,images: [""],
-//                                     firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                     secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                Rocket(name: "Falcon 3",
-//                                     height: HeightAndDiameterData(meters: 0, feet: 0),
-//                                     diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                     mass: Mass(kg: 0, lb: 0),
-//                                     payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                     firstFlight: "0",
-//                                     country: "0",
-//                                     costPerLaunch: 0,images: [""],
-//                                     firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                     secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                Rocket(name: "Falcon 4",
-//                                     height: HeightAndDiameterData(meters: 0, feet: 0),
-//                                     diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                     mass: Mass(kg: 0, lb: 0),
-//                                     payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                     firstFlight: "0",
-//                                     country: "0",
-//                                     costPerLaunch: 0,images: [""],
-//                                     firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                     secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                Rocket(name: "Falcon 5",
-//                                       height: HeightAndDiameterData(meters: 5, feet: 5),
-//                                       diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                       mass: Mass(kg: 0, lb: 0),
-//                                       payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                       firstFlight: "0",
-//                                       country: "0",
-//                                       costPerLaunch: 0, images: [""],
-//                                       firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                       secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                                Rocket(name: "Falcon 6",
-//                                                     height: HeightAndDiameterData(meters: 0, feet: 0),
-//                                                     diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                                     mass: Mass(kg: 0, lb: 0),
-//                                                     payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                                     firstFlight: "0",
-//                                                     country: "0",
-//                                                     costPerLaunch: 0,images: [""],
-//                                                     firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                                     secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                                Rocket(name: "Falcon 7",
-//                                                     height: HeightAndDiameterData(meters: 0, feet: 0),
-//                                                     diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                                     mass: Mass(kg: 0, lb: 0),
-//                                                     payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                                     firstFlight: "0",
-//                                                     country: "0",
-//                                                     costPerLaunch: 0,images: [""],
-//                                                     firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                                     secondStage: Stage(engines: 0, fuelAmountTons: 0)),
-//                                Rocket(name: "Falcon 8",
-//                                                     height: HeightAndDiameterData(meters: 0, feet: 0),
-//                                                     diameter: HeightAndDiameterData(meters: 0, feet: 0),
-//                                                     mass: Mass(kg: 0, lb: 0),
-//                                                     payloadWeights: [PayloadWeights(id: "leo", name: "fhjd", kg: 0, lb: 0)],
-//                                                     firstFlight: "0",
-//                                                     country: "0",
-//                                                     costPerLaunch: 0,images: [""],
-//                                                     firstStage: Stage(engines: 0, fuelAmountTons: 0),
-//                                                     secondStage: Stage(engines: 0, fuelAmountTons: 0))
-//              ]

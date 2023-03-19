@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Parameters {
     let name: String
     let firstValue: Value

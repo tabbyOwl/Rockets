@@ -48,7 +48,6 @@ class RocketDataTableCell: UITableViewCell {
     //MARK: - Public methods
     
     func configure(with model: CellDataProtocol) {
-        
         nameLabel.text = model.name
         valueLabel.text = model.value
     }

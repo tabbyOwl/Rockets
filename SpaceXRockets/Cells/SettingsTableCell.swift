@@ -39,16 +39,10 @@ class SettingsTableCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override class func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
+
     //MARK: public methods
     
     func configure(with model: Parameters, numberOfSegment: Int) {
-        
         self.nameLabel.text = model.name
         units.append(model.firstValue.unit.rawValue)
         units.append(model.secondValue.unit.rawValue)
@@ -72,9 +66,7 @@ class SettingsTableCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
-            
             nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 30),
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             

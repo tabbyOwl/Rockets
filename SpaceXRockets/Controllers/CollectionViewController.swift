@@ -12,15 +12,13 @@ protocol CollectionViewControllerDelegate : AnyObject {
 }
 
 class CollectionViewController: UIViewController {
-    
     var parameters: [Parameters] = []
     
-    private let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .black
-
         return collection
     }()
     
@@ -28,17 +26,24 @@ class CollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         setupDefaultUnits()
         setUpView()
         setupConstraints()
-    }
-
-    func reloadData() {
-        collectionView.reloadData()
+        setupNotification()
     }
     
     //MARK: private methods
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollection), name: Notification.Name.settingsNotification, object: nil)
+        
+    }
+    
+    @objc func updateCollection(notification: Notification) {
+        collectionView.reloadData()
+    }
+    
     
     private func setupDefaultUnits() {
         if !parameters.isEmpty {
